@@ -12,6 +12,7 @@ out/
 *.iws
 *.iml
 *.ipr
+Document.txt
 
 ### Eclipse ###
 .apt_generated
