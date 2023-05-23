@@ -46,7 +46,6 @@ public class DownloadManager {
     void updateUI(FileInfo file) {
         FileInfo fileInfo = this.tableView.getItems().get(Integer.parseInt(file.getIndex()) - 1);
         fileInfo.setStatus(file.getStatus());
-        System.out.println("UpdateUI: "+file.getSize());
         fileInfo.setSize(AppUtil.formatFileSize(AppUtil.parseDouble(file.getSize())));
         this.tableView.refresh();
         System.out.println(file);

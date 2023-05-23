@@ -41,7 +41,6 @@ public class AppUtil {
                 size = size * 1024 * 1024 * 1024;
             }
         }
-        System.out.println("AppUtil: " + str.substring(0, index+1));
         return size;
     }
 }

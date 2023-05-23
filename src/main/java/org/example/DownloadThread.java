@@ -30,7 +30,6 @@ public class DownloadThread extends Thread {
             if (fileSize > 0) {
                 file.setSize(AppUtil.formatFileSize((double) fileSize));
                 Files.copy(new URL(this.file.getUrl()).openStream(), Paths.get(this.file.getPath()));
-                System.out.println("Thread File Size: "+fileSize);
                 this.file.setStatus(Constants.DONE);
             } else {
                 System.out.println("Unable to determine the size");

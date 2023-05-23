@@ -34,7 +34,6 @@ public class ProgressBarTableCell<S> extends TableCell<S, Double> {
     private String getFormattedProgress(double progress) {
         if (getTableRow() != null && getTableRow().getItem() instanceof FileInfo) {
             FileInfo fileInfo = (FileInfo) getTableRow().getItem();
-            System.out.println("Here is problem maybe: "+fileInfo.getSize());
             double fileSize = AppUtil.parseDouble(fileInfo.getSize());
             double downloadedBytes = fileSize*progress;
             return String.format("%.0f%% (%.0f%%/%.0f%% bytes)", progress * 100, downloadedBytes, fileSize);
