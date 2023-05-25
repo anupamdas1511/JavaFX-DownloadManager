@@ -13,6 +13,7 @@ public class ProgressBarTableCell<S> extends TableCell<S, Double> {
     public ProgressBarTableCell() {
         this.progressBar = new ProgressBar();
         progressBar.setMaxWidth(Double.MAX_VALUE);
+        setGraphic(progressBar);
     }
 
     @Override
@@ -36,7 +37,7 @@ public class ProgressBarTableCell<S> extends TableCell<S, Double> {
             FileInfo fileInfo = (FileInfo) getTableRow().getItem();
             double fileSize = AppUtil.parseDouble(fileInfo.getSize());
             double downloadedBytes = fileSize*progress;
-            return String.format("%.0f%% (%.0f%%/%.0f%% bytes)", progress * 100, downloadedBytes, fileSize);
+            return String.format("%.0f%% (%s/%s)", progress * 100, AppUtil.formatFileSize(downloadedBytes), AppUtil.formatFileSize(fileSize));
         }
         return "";
     }
