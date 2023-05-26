@@ -4,10 +4,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import org.example.config.AppConfig;
 import org.example.config.AppUtil;
 import org.example.constants.Constants;
@@ -73,6 +71,32 @@ public class DownloadManager {
         TableColumn<FileInfo, String> status = (TableColumn<FileInfo, String>) this.tableView.getColumns().get(4);
         status.setCellValueFactory(p->{
             return p.getValue().statusProperty();
+        });
+        status.setCellFactory(column -> new TableCell<FileInfo, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(item);
+                if (item == null || empty) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    switch (item) {
+                        case Constants.DOWNLOADING:
+                            setTextFill(Color.BLUE);
+                            break;
+                        case Constants.DONE:
+                            setTextFill(Color.GREEN);
+                            break;
+                        case Constants.FAILED:
+                            setTextFill(Color.RED);
+                            break;
+                        default:
+                            setTextFill(Color.BLACK);
+                            break;
+                    }
+                }
+            }
         });
         TableColumn<FileInfo, String> action = (TableColumn<FileInfo, String>) this.tableView.getColumns().get(5);
         action.setCellValueFactory(p->{
