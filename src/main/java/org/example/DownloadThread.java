@@ -7,9 +7,7 @@ import org.example.models.FileInfo;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -27,7 +25,8 @@ public class DownloadThread extends Thread {
         // download logic
         try {
             URL fileUrl = new URL(file.getUrl());
-            HttpURLConnection connection = (HttpURLConnection) fileUrl.openConnection();
+            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("172.16.199.20", 8080));
+            HttpURLConnection connection = (HttpURLConnection) fileUrl.openConnection(proxy);
             long fileSize = connection.getContentLengthLong();
             if (fileSize > 0) {
                 file.setSize(AppUtil.formatFileSize((double) fileSize));
